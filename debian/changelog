@@ -1,0 +1,54 @@
+node-p-limit (3.1.0+~cs2.3.0-1) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.5.1
+  * Modernize debian/watch
+  * Embed yocto-queue
+  * New upstream version 3.1.0+~cs2.3.0
+  * Update patch
+
+ -- Xavier Guimard <yadd@debian.org>  Sun, 29 Nov 2020 08:00:40 +0100
+
+node-p-limit (3.0.2-1) unstable; urgency=medium
+
+  * Team upload
+  * Bump debhelper compatibility level to 13
+  * Use dh-sequence-nodejs
+  * New upstream version 3.0.2
+  * Refresh test
+  * Install p-try in nodejs root directory
+
+ -- Xavier Guimard <yadd@debian.org>  Fri, 30 Oct 2020 22:19:46 +0100
+
+node-p-limit (2.2.2-1) unstable; urgency=medium
+
+  * Team upload
+
+  [ Debian Janitor ]
+  * Trim trailing whitespace.
+  * Use secure copyright file specification URI.
+  * Bump debhelper from old 9 to 12.
+  * Set debhelper-compat version in Build-Depends.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+  * Update Vcs-* headers from URL redirect.
+  * Use canonical URL in Vcs-Git.
+
+  [ Xavier Guimard ]
+  * Declare compliance with policy 4.5.0
+  * Use pkg-js-tools auto install
+  * Add "Rules-Requires-Root: no"
+  * Change section to javascript
+  * Add debian/gbp.conf
+  * New upstream version 2.2.2
+  * Embed component: p-try
+  * Embed some little modules for tests only
+  * Enable upstream test using tape instead of ava
+
+ -- Xavier Guimard <yadd@debian.org>  Sun, 08 Mar 2020 19:00:43 +0100
+
+node-p-limit (1.1.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #854121)
+
+ -- Nikhil Gawande <nikhilgawande21@gmail.com>  Sat, 04 Feb 2017 10:27:47 +0000

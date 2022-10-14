@@ -1,0 +1,27 @@
+Source: node-p-limit
+Section: javascript
+Priority: optional
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders: Nikhil Gawande <nikhilgawande21@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+ , node-tape <!nocheck>
+ , dh-sequence-nodejs
+Standards-Version: 4.5.1
+Vcs-Browser: https://salsa.debian.org/js-team/node-p-limit
+Vcs-Git: https://salsa.debian.org/js-team/node-p-limit.git
+Homepage: https://github.com/sindresorhus/p-limit
+Testsuite: autopkgtest-pkg-nodejs
+Rules-Requires-Root: no
+
+Package: node-p-limit
+Architecture: all
+Depends: ${misc:Depends}
+ , nodejs
+Provides: ${nodejs:Provides}
+Description: run multiple promise-returning & async functions
+ This library allows running multiple promise-returning & async functions
+ with limited concurrency
+ .
+ This is a dependency for AVA, a futuristic test runner.
+ .
+ Node.js is an event-based server-side JavaScript engine.

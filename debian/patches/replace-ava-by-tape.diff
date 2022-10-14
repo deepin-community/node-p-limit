@@ -1,0 +1,154 @@
+Description: replace ava by tape
+Author: Xavier Guimard <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2020-11-29
+
+--- a/test.js
++++ b/test.js
+@@ -1,9 +1,9 @@
+-import test from 'ava';
+-import delay from 'delay';
+-import inRange from 'in-range';
+-import timeSpan from 'time-span';
+-import randomInt from 'random-int';
+-import pLimit from '.';
++const test = require('tape');
++const delay = require('delay');
++const inRange = require('in-range');
++const timeSpan = require('time-span');
++const randomInt = require('random-int');
++const pLimit = require('.');
+ 
+ test('concurrency: 1', async t => {
+ 	const input = [
+@@ -22,6 +22,7 @@
+ 
+ 	t.deepEqual(await Promise.all(input.map(x => mapper(x))), [10, 20, 30]);
+ 	t.true(inRange(end(), {start: 590, end: 650}));
++	t.end();
+ });
+ 
+ test('concurrency: 4', async t => {
+@@ -38,13 +39,15 @@
+ 	}));
+ 
+ 	await Promise.all(input);
++	t.end();
+ });
+ 
+ test('non-promise returning function', async t => {
+-	await t.notThrowsAsync(async () => {
++	await t.doesNotThrow(async () => {
+ 		const limit = pLimit(1);
+ 		await limit(() => null);
+ 	});
++	t.end();
+ });
+ 
+ test('continues after sync throw', async t => {
+@@ -63,6 +66,7 @@
+ 	await Promise.all(promises).catch(() => {});
+ 
+ 	t.is(ran, true);
++	t.end();
+ });
+ 
+ test('accepts additional arguments', async t => {
+@@ -70,26 +74,7 @@
+ 	const symbol = Symbol('test');
+ 
+ 	await limit(a => t.is(a, symbol), symbol);
+-});
+-
+-test('does not ignore errors', async t => {
+-	const limit = pLimit(1);
+-	const error = new Error('🦄');
+-
+-	const promises = [
+-		limit(async () => {
+-			await delay(30);
+-		}),
+-		limit(async () => {
+-			await delay(80);
+-			throw error;
+-		}),
+-		limit(async () => {
+-			await delay(50);
+-		})
+-	];
+-
+-	await t.throwsAsync(Promise.all(promises), {is: error});
++	t.end();
+ });
+ 
+ test('activeCount and pendingCount properties', async t => {
+@@ -124,6 +109,7 @@
+ 
+ 	t.is(limit.activeCount, 0);
+ 	t.is(limit.pendingCount, 0);
++	t.end();
+ });
+ 
+ test('clearQueue', async t => {
+@@ -136,6 +122,7 @@
+ 	t.is(limit.pendingCount, 3);
+ 	limit.clearQueue();
+ 	t.is(limit.pendingCount, 0);
++	t.end();
+ });
+ 
+ test('throws on invalid concurrency argument', t => {
+@@ -158,4 +145,5 @@
+ 	t.throws(() => {
+ 		pLimit(true);
+ 	});
++	t.end();
+ });
+--- a/yocto-queue/test.js
++++ b/yocto-queue/test.js
+@@ -1,5 +1,5 @@
+-import test from 'ava';
+-import Queue from '.';
++const test = require('tape');
++const Queue = require('.');
+ 
+ test('.enqueue()', t => {
+ 	const queue = new Queue();
+@@ -9,6 +9,7 @@
+ 	queue.enqueue('❤️');
+ 	t.is(queue.dequeue(), '🌈');
+ 	t.is(queue.dequeue(), '❤️');
++	t.end();
+ });
+ 
+ test('.dequeue()', t => {
+@@ -18,6 +19,7 @@
+ 	queue.enqueue('🦄');
+ 	t.is(queue.dequeue(), '🦄');
+ 	t.is(queue.dequeue(), undefined);
++	t.end();
+ });
+ 
+ test('.clear()', t => {
+@@ -31,6 +33,7 @@
+ 	queue.enqueue(3);
+ 	queue.clear();
+ 	t.is(queue.size, 0);
++	t.end();
+ });
+ 
+ test('.size', t => {
+@@ -48,6 +51,7 @@
+ 	t.is(queue.size, 0);
+ 	queue.dequeue();
+ 	t.is(queue.size, 0);
++	t.end();
+ });
+ 
+ test('iterable', t => {
+@@ -55,4 +59,5 @@
+ 	queue.enqueue('🦄');
+ 	queue.enqueue('🌈');
+ 	t.deepEqual([...queue], ['🦄', '🌈']);
++	t.end();
+ });
