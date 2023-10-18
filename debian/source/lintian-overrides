@@ -1,0 +1,5 @@
+# Same author
+add-component-copyright p-try *
+add-component-copyright yocto-queue *
+# Doc
+very-long-line-length-in-source-file *.md line * 

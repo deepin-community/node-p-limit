@@ -1,0 +1,1 @@
+mjs2cjs -b -o index.cjs index.js
