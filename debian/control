@@ -4,9 +4,11 @@ Priority: optional
 Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
 Uploaders: Nikhil Gawande <nikhilgawande21@gmail.com>
 Build-Depends: debhelper-compat (= 13)
+ , dh-sequence-nodejs (>= 0.14.11~)
+ , node-rollup-plugin-node-resolve
  , node-tape <!nocheck>
- , dh-sequence-nodejs
-Standards-Version: 4.5.1
+ , rollup
+Standards-Version: 4.6.0
 Vcs-Browser: https://salsa.debian.org/js-team/node-p-limit
 Vcs-Git: https://salsa.debian.org/js-team/node-p-limit.git
 Homepage: https://github.com/sindresorhus/p-limit
@@ -16,8 +18,8 @@ Rules-Requires-Root: no
 Package: node-p-limit
 Architecture: all
 Depends: ${misc:Depends}
- , nodejs
 Provides: ${nodejs:Provides}
+Multi-Arch: foreign
 Description: run multiple promise-returning & async functions
  This library allows running multiple promise-returning & async functions
  with limited concurrency
